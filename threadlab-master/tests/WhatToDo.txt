@@ -1,0 +1,37 @@
+Things we should focus on for the project.
+
+***IMPORTANT NOTE: All code is to be kept in the single threadpool.c file, 
+if we need extra files we are probably doing something wrong***
+
+
+***OTHER NOTE: our project description is meant to be in a PDF form for some reason
+so we can probably just add notes here and then later transfer over to word or docs
+to then turn into a PDF***
+
+1. Define our structs future and thread_pool.
+
+For thread_pool we need:
+to be able to track all threads within the pool (list.c list of threads most likely)
+to be able to keep track of the global submission pool (list of commands and processes we need to use)
+flag to denote that the pool is shutting down
+
+//////////
+You will need to create a static function that performs the core work of each worker
+thread. You will pass this function to pthread create(), along with an argument
+(such as a pointer to a preallocated struct) allowing the thread to identify its position
+in the worker pool and to obtain a reference to the pool itself.
+//////////
+
+For future we need:
+a pointer to the function to be called
+another pointer/array of arguments to be passed in to the above function
+Result of function (once the result is available)
+Variable(s) to determine what state it is in (started/in progress/completed)
+
+
+2. After finishing implementation of our structs, we complete the given blank methods
+with tips found inside the handout (not important atm until we finish structs)
+
+First Thought: We have a queue of given commands we need to execute. Each time we try to give a thread
+one of these commands we will need to lock the original pool so we may grab that command and remove it from
+the original queue so that the other threads dont execute the same command.
